@@ -1,0 +1,69 @@
+body{
+    margin:auto;
+    overflow-x: hidden;
+
+}
+
+
+/*------header------*/
+
+header{
+    background-color:  rgb(224, 224, 224);
+}
+
+.navbar-brand{
+    font-size: 1.8em;
+}
+.navbar-nav{
+    font-size: 1.3em;
+}
+
+#navbarContent{
+    justify-content: flex-end;
+}
+
+.logo{
+    margin-right: 3px;
+}
+
+
+/*------section produits------*/
+
+
+.title-product{
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media all and (max-width: 767px){
+    {
+        width: 100%;
+    }
+}
+
+.middle{
+    display: flex;
+    justify-content: center;
+}
+
+.btn{
+    margin-left: 25%;
+    width: 50%;
+}
+
+/*------footer------*/
+
+footer{
+    background-color: rgb(224, 224, 224);
+}
+
+.display{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.display a{
+    color: black;
+    font-weight: 600;
+}
