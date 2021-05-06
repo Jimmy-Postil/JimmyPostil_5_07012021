@@ -1,6 +1,7 @@
 body{
     margin:auto;
     overflow-x: hidden;
+    background-color: rgb(223, 222, 222);
 
 }
 
@@ -8,7 +9,7 @@ body{
 /*------header------*/
 
 header{
-    background-color:  rgb(224, 224, 224);
+    background-color:  #f2e8f0;
 }
 
 .navbar-brand{
@@ -26,6 +27,36 @@ header{
     margin-right: 3px;
 }
 
+/*------section bannière------*/
+
+.background{
+    background: url(../back-end/images/jlo.jpg) no-repeat center;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    height: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.title-back{
+    color: white;
+    text-align: center;
+}
+
+.button-principal{
+    border: 1px solid white;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    padding: 3px 15px 3px 15px;
+}
+
+.button-principal a{
+    color: black;
+}
 
 /*------section produits------*/
 
@@ -35,18 +66,12 @@ header{
     margin-top: 20px;
 }
 
-@media all and (max-width: 767px){
-    {
-        width: 100%;
-    }
-}
-
 .middle{
     display: flex;
     justify-content: center;
 }
 
-.btn{
+.btn-primary{
     margin-left: 25%;
     width: 50%;
 }
@@ -54,7 +79,7 @@ header{
 /*------footer------*/
 
 footer{
-    background-color: rgb(224, 224, 224);
+    background-color: #f2e8f0;
 }
 
 .display{
@@ -66,4 +91,39 @@ footer{
 .display a{
     color: black;
     font-weight: 600;
+}
+
+
+/*---------------------------------pages produits-----------------------------*/
+
+#objectif{
+    width: 50%;
+}
+
+.quantite{
+    width: 50%;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.footer-product{
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+
+
+/*------page de confirmation de commande------*/
+
+.background-check{
+    background: url(../back-end/images/pp.jpg) no-repeat center;
+    height: 700px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
