@@ -66,14 +66,14 @@ header{
     margin-top: 20px;
 }
 
-.middle{
-    display: flex;
-    justify-content: center;
-}
-
 .btn-primary{
     margin-left: 25%;
     width: 50%;
+}
+
+.middle{
+    display: flex;
+    justify-content: center;
 }
 
 /*------footer------*/
@@ -126,4 +126,24 @@ footer{
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+/*------panier------*/
+
+.bo{
+    border: 2px solid #6283c9;
+    border-radius: 10px;
+}
+
+#firstname, #lastname, #adresse, #city, #email{
+    width: 70%;
+}
+
+.firstname, .lastname, .adresse, .city, .email{
+    width: 60px;
+    margin-right: -4px;
+}
+
+#firstname{
+    margin-top: 10px;
 }
