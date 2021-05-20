@@ -1,13 +1,36 @@
+//Page produit//
+
 //Récupération de l'id dans l'url
-const cameraId = location.search.split("=")[1];
-console.log(cameraId);
+const params = new URLSearchParams(document.location.search.split('?')[1]);
+const id = params.get("id");
+console.log(id);
 
 //Appel de l'API avec la récupération de l'id
+const getProduct = async function () {
+    let response = await fetch("http://localhost:3000/api/cameras/" + id);
+    let camera = await response.json();
+    console.log(camera);
 
- fetch("http://localhost:3000/api/cameras/" + cameraId)
-        .then(response => response.json())
-        .then(data => {document.getElementById("camera-title").innerHTML = data.name})
-        (data => {document.getElementById("camera-img").innerHTML = data.imageUrl})
-        (data => {document.getElementById("camera-description").innerHTML = data.description})
-        (data => {document.getElementById("objectif").innerHTML = data.lenses})
-        (data => {document.getElementById("camera-price").innerHTML = data.price});
+    //Ajout des composants de la partie section-produit
+    document.getElementById("camera-img").src = camera.imageUrl;
+    document.getElementById("camera-title").innerHTML = camera.name;
+    document.getElementById("camera-description").innerHTML = camera.description;
+    document.getElementById("camera-price").innerHTML = camera.price / 100 + "€";
+    document.getElementById("quantite").value = resultQuantite;
+
+    // ajout des différents objectifs 
+    const lenses = camera.lenses;
+
+    for (i = 0; i < lenses.length; i++) {
+        const selectOption = document.createElement('option');
+        select = document.getElementById("objectif");
+        select.appendChild(selectOption);
+        selectOption.textContent = lenses[i];
+        selectOption.setAttribute("value", lenses[i]);
+    }
+
+    //Initlaisation du bouton d'ajout au panier et écoute de l'événement
+}
+getProduct();
+
+

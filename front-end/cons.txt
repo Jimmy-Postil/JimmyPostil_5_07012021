@@ -1,3 +1,0 @@
-1. récupérer l'id dans l'url
-2. faire un fetch avec l'id
-3.
