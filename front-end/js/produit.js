@@ -16,7 +16,6 @@ const getProduct = async function () {
     document.getElementById("camera-title").innerHTML = camera.name;
     document.getElementById("camera-description").innerHTML = camera.description;
     document.getElementById("camera-price").innerHTML = camera.price / 100 + "€";
-    document.getElementById("quantite").value = resultQuantite;
 
     // ajout des différents objectifs 
     const lenses = camera.lenses;
@@ -25,12 +24,35 @@ const getProduct = async function () {
         const selectOption = document.createElement('option');
         select = document.getElementById("objectif");
         select.appendChild(selectOption);
-        selectOption.textContent = lenses[i];
+        selectOption.innerHTML = lenses[i];
         selectOption.setAttribute("value", lenses[i]);
     }
 
-    //Initlaisation du bouton d'ajout au panier et écoute de l'événement
+    //Initialisation du bouton d'ajout au panier et écoute de l'événement
+    const btnPanier = document.getElementById("btn-panier");
+    btnPanier.addEventListener("click", function (event) {
+        event.preventDefault();
+        let select = document.querySelector("select");
+        if (select == 0) {
+            alert('Vous devez choisir un objectif !');
+        } else {
+            let cameraPanier = {
+                id: camera._id,
+                imageUrl: camera.imageUrl,
+                name: camera.name,
+                description: camera.description,
+                lenses: camera.lenses,
+                price: camera.price,
+                quantity: 1
+            }
+            let camPanier = JSON.stringify(cameraPanier);
+            localStorage.setItem(camera._id, camPanier);
+            alert("Votre choix à bien été ajouté à votre panier");
+        }
+    })
 }
 getProduct();
+
+
 
 

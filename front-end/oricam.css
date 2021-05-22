@@ -71,11 +71,6 @@ header{
     width: 50%;
 }
 
-.middle{
-    display: flex;
-    justify-content: center;
-}
-
 /*------footer------*/
 
 footer{
@@ -146,4 +141,14 @@ footer{
 
 #firstname{
     margin-top: 10px;
+}
+
+.cent{
+    text-align: center;
+}
+
+.middle{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
 }

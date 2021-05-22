@@ -43,61 +43,16 @@
     </header>
 
     <!--section panier-->
-    <section>
-        <div class="container">
-            <div class="row mt-5 pt-3 bo">
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                    <img src="../back-end/images/vcam_1.jpg" alt="Zurss 50S" height="150px">
-                </div>
-                <div class="col-6 col-md-4 col-lg-4 col-xl-4">
-                    <h2>Zurss 50S</h2>
-                    <p>Quantité : </p>
-                    <p>Objectif : </p>
-                    <p>Prix : </p>
-                </div>
-                <div class="col-6 col-md-4 pt-4 col-lg-4 col-xl-4">
-                    <button type="button" class="btn btn-danger">Supprimer du panier</button>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row mt-3 pt-3 bo">
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                    <img src="../back-end/images/vcam_2.jpg" alt="Hirsch 400DTS" height="150px">
-                </div>
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                    <h2>Hirsch 400DTS</h2>
-                    <p>Quantité : </p>
-                    <p>Objectif : </p>
-                    <p>Prix : </p>
-                </div>
-                <div class="col-12 col-md-4 col-lg-4 col-xl-4">
-                    <button type="button" class="btn btn-danger">Supprimer du panier</button>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row mt-3">
-                <div class="col text-center">
-                    <p>Prix total de votre panier : </p>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <button type="button" class="btn btn-primary">Continuer mes achats</button>
-                </div>
-            </div>
-        </div>
+    <section id="section-panier">
+      
     </section>
 
 
     <!--formulaire-->
 
-    <div class="container">
+    <div class="container" id="container-formulaire">
         <div class="row mt-4">
-            <div class="col">
+            <div class="col" id="validation-commande">
                 <h6>Veuillez rentrer vos coordonnées pour finaliser votre commande</h6>
                 <form action="traitement.js" method="POST">
                     <label for="firstname" class="firstname">Prénom</label>
@@ -154,6 +109,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+        <script src="./js/panier.js"></script>
 </body>
 
 </html>
