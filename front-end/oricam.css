@@ -110,6 +110,10 @@ footer{
     width: 100%;
 }
 
+.btn-back{
+    width: 20%;
+    margin-left: 20px;
+}
 
 
 /*------page de confirmation de commande------*/

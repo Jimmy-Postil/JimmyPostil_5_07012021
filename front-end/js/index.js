@@ -37,7 +37,7 @@ function colConstructor(cameras) {
 
         let cardLink = document.createElement("a");
         cardBody.appendChild(cardLink);
-        cardLink.classList.add("btn", "btn-primary");
+        cardLink.classList.add("btn", "btn-primary", "btn-choice");
         cardLink.href = "produit.html?id=" + cameras[i]._id;
         cardLink.textContent = "En savoir plus";
 

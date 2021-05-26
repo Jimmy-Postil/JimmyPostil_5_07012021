@@ -1,5 +1,6 @@
 //Page panier
 
+
 //Initialisation du tableau productsId pour le formulaire
 let productsId = [];
 
@@ -69,6 +70,7 @@ for (let i = 0; i < camPanier.length; i++) {
     //prix
     let price = document.createElement("p");
     price.innerHTML = "Prix : " + cam.price / 100 + "€";
+
     colcomposPanier.appendChild(price);
 
     let colbuttonPanier = document.createElement("div");
@@ -112,7 +114,6 @@ for (let i = 0; i < camPanier.length; i++) {
     colContinue.setAttribute("id", "col-continue");
     rowContinue.appendChild(colContinue);
 
-
 }
 
 //Supression de la caméra dans le panier
@@ -146,28 +147,88 @@ if (camPanier.length > 0) {
 
 }
 
-//Création de la classe client 
-
-class Client {
-    constructor(firstName, lastName, adress, city, email) {
-        (this.firstName = firstName),
-            (this.lastName = lastName),
-            (this.adress = adress),
-            (this.city = city),
-            (this.email = email)
-    }
-}
+//Initialisation des éléments nécessaires du DOM à la vérification des données
+let firstName = document.getElementById("firstname");
+let lastName = document.getElementById("lastname");
+let adresse = document.getElementById("adresse");
+let city = document.getElementById("city");
+let email = document.getElementById("email");
 
 //Création des conditions pour la validité syntaxique des champs de formulaires
-let validite = document.getElementById("validation-commande");
-validite.addEventListener("click", function (event) {
-    event.preventDefault();
-
-
-    //Vérification
-
+firstName.addEventListener("change", function () {
+    if (firstName.validity.patternMismatch) {
+        firstName.setCustomValidity("Ce champ contient des erreurs");
+    } else {
+        firstName.setCustomValidity("");
+    }
 })
 
+lastName.addEventListener("change", function () {
+    if (lastName.validity.patternMismatch) {
+        lastName.setCustomValidity("Ce champ contient des erreurs");
+    } else {
+        lastName.setCustomValidity("");
+    }
+})
 
+adresse.addEventListener("change", function () {
+    if (adresse.validity.patternMismatch) {
+        adresse.setCustomValidity("Veuillez rentrer une adresse correcte");
+    } else {
+        adresse.setCustomValidity("");
+    }
+})
+
+city.addEventListener("change", function () {
+    if (city.validity.patternMismatch) {
+        city.setCustomValidity("Veuillez rentrer une ville existante");
+    } else {
+        city.setCustomValidity("");
+    }
+})
+
+email.addEventListener("change", function () {
+    if (email.validity.patternMismatch) {
+        email.setCustomValidity("Veuillez renter un e-mail correcte");
+    } else {
+        email.setCustomValidity("");
+    }
+})
+
+//Ecoute du bouton d'envoi des données pour finaliser la commande
+let validite = document.getElementById("validation-commande");
+validite.addEventListener("click", function () {
+
+    //Création de l'object contact avec la récupération des données entrées par l'utilisateur
+    let resultat = {
+        contact: {
+            firstName: firstName.value,
+            lastName: lastName.value,
+            adress: adresse.value,
+            city: city.value,
+            email: email.value,
+        },
+        product: productsId
+    }
+    console.log(resultat);
+
+    //Envoi des données au serveur avec fetch et la méthode post
+    fetch("http://localhost:3000/api/cameras/order",{
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(resultat)
+    })
+        .then(response => response.json())
+        .then(data => {
+            localStorage.clear();
+            let confirmCommande = {
+                idCommande: data.order_id,
+                PrixTotal: calculPrice
+            }
+            console.log(confirmCommande);
+        });
+})
 
 
