@@ -9,20 +9,18 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
         integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-    <link rel="stylesheet" href="oricam.css">
-
-    <title>Oricam</title>
+    <link rel="stylesheet" href="../oricam.css">
+    <title>Zurss 50S</title>
 </head>
 
 <body>
-
     <!--header-->
 
     <header>
         <div class="container">
             <div class="row">
                 <nav class="col navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" href="index.html"><img src="../back-end/images/orinoco.png"
+                    <a class="navbar-brand" href="index.html"><img src="../../back-end/images/orinoco.png"
                             alt="Logo orinoco"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +32,8 @@
                                 <a class="nav-link text-primary" href="index.html">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./panier.html"><i class=" text-primary shop fas fa-cart-plus"></i></a>
+                                <a class="nav-link" href="./panier.html"><i
+                                        class=" text-primary shop fas fa-cart-plus"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -43,25 +42,43 @@
         </div>
     </header>
 
-    <!--section bannière-->
+    <!--section concernant le choix des options-->
 
-
-    <section class="background">
-        <h1 class="title-back">Trouver votre caméra vintage</h1>
-        <p class="title-back">Découvrez nos produits à la vente et choisissez celui qui vous intéresse.</p>
-        <button class="button-principal" type="button"><a href="#decouvrir">Découvrir</a></button>
+    <section id="section-produit">
+        <div class="container">
+            <div class="row">
+                <div class="col center">
+                    <div class="card mt-4 w-75 shadow">
+                        <div class="card-body" id="card-body">
+                            <img class="card-img-top" id="camera-img">
+                            <h3 class="card-title pt-3" id="camera-title"></h3>
+                            <p class="card-text" id="camera-description"></p>
+                            <p class="card-text">Quantité : <input type="number" value="1" class="quantite" id="quantite"
+                                    autofocus />
+                            </p>
+                            <form method="post" action="camera.js" class="card-text">
+                                <p>
+                                    <label for="objectif">Objectif : </label>
+                                    <select name="objectif" id="select-objectif">
+                                    </select>
+                                </p>
+                            </form>
+                            <p class="card-text" id="camera-price"></p>
+                            <a class="btn btn-success" href="#" role="button" id="btn-panier">Ajouter au panier</a>
+                            <div class="col-12 mt-3"></div>
+                            <a class="btn btn-primary btn-look" href="./panier.html" role="button">Voir mon panier</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
     </section>
 
-
-    <!--Section produits-->
-
-    <section id="sectionCameras">
-        <h3 class="title-product" id="decouvrir">Découvrez notre séléction d'anciens appareils photo</h3>
-    </section>
 
     <!--footer-->
 
-    <footer>
+    <footer class="footer-product">
         <div class="pt-5 pb-4 mt-4">
             <ul class=display>
                 <li><a href="#">À propos</a></li>
@@ -70,7 +87,6 @@
             </ul>
         </div>
     </footer>
-
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -81,7 +97,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-        <script src="./js/index.js"></script>
+    <script src="../js/produit.js"></script>
 </body>
 
 </html>

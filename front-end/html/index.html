@@ -9,8 +9,9 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
         integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-    <link rel="stylesheet" href="oricam.css">
-    <title>panier</title>
+    <link rel="stylesheet" href="../oricam.css">
+
+    <title>Oricam</title>
 </head>
 
 <body>
@@ -21,7 +22,7 @@
         <div class="container">
             <div class="row">
                 <nav class="col navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" href="index.html"><img src="../back-end/images/orinoco.png"
+                    <a class="navbar-brand" href="index.html"><img src="../../back-end/images/orinoco.png"
                             alt="Logo orinoco"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +34,7 @@
                                 <a class="nav-link text-primary" href="index.html">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><i class=" text-primary shop fas fa-cart-plus"></i></a>
+                                <a class="nav-link" href="./panier.html"><i class=" text-primary shop fas fa-cart-plus"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -42,52 +43,25 @@
         </div>
     </header>
 
-    <!--section panier-->
-    <section id="section-panier">
-      
+    <!--section bannière-->
+
+
+    <section class="background">
+        <h1 class="title-back">Trouver votre caméra vintage</h1>
+        <p class="title-back">Découvrez nos produits à la vente et choisissez celui qui vous intéresse.</p>
+        <button class="button-principal" type="button"><a href="#decouvrir">Découvrir</a></button>
     </section>
 
 
-    <!--formulaire-->
+    <!--Section produits-->
 
-    <div class="container" id="container-formulaire">
-        <div class="row mt-4">
-            <div class="col" id="validation-commande">
-                <h6>Veuillez rentrer vos coordonnées pour finaliser votre commande</h6>
-                <form action="traitement.js" method="POST">
-                    <label for="firstname" class="firstname">Prénom</label>
-                    <input type="text" name="firstname" id="firstname" pattern="[A-Za-zàáâãäåçèéêëìíîïðòóôõöùúûüýÿñÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÒÓÔÕÖÙÚÛÜÝŸÑ -]+">
-                </form>
-                <form action="traitement.js" method="POST">
-                    <label for="name" class="lastname">Nom</label>
-                    <input type="text" name="lastname" id="lastname" pattern="[A-Za-zàáâãäåçèéêëìíîïðòóôõöùúûüýÿñÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÒÓÔÕÖÙÚÛÜÝŸÑ -]+">
-                </form>
-                <form action="traitement.js" method="POST">
-                    <label for="adresse" class="adresse">Adresse</label>
-                    <input type="text" name="adresse" id="adresse" pattern="[#.0-9a-zA-Z\s,-]+">
-                </form>
-                <form action="traitement.js" method="POST">
-                    <label for="city" class="city">Ville</label>
-                    <input type="text" name="city" id="city"  pattern="[A-Za-zàáâãäåçèéêëìíîïðòóôõöùúûüýÿñÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÒÓÔÕÖÙÚÛÜÝŸÑ -]+">
-                </form>
-                <form action="traitement.js" method="POST">
-                    <label for="email" class="email">e-mail</label>
-                    <input type="text" name="email" id="email" pattern="(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)">
-                </form>
-                <div class="col mt-4">
-                <button type="submit" class="btn btn-primary">Valider ma commande</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-        
-
+    <section id="sectionCameras">
+        <h3 class="title-product" id="decouvrir">Découvrez notre séléction d'anciens appareils photo</h3>
+    </section>
 
     <!--footer-->
 
-    <footer class="footer-product">
+    <footer>
         <div class="pt-5 pb-4 mt-4">
             <ul class=display>
                 <li><a href="#">À propos</a></li>
@@ -107,7 +81,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-        <script src="./js/panier.js"></script>
+        <script src="../js/index.js"></script>
 </body>
 
 </html>

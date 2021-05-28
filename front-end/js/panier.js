@@ -1,9 +1,6 @@
 //Page panier
 
 
-//Initialisation du tableau productsId pour le formulaire
-let productsId = [];
-
 //Initialisation de la variable du prix total à 0
 let calculPrice = 0;
 
@@ -64,11 +61,12 @@ for (let i = 0; i < camPanier.length; i++) {
 
     //objectif
     let objectif = document.createElement("p");
-    objectif.innerHTML = "Objectif : " + cam.lenses[i];
+    objectif.innerHTML = "Objectif : " + cam.lenses;
     colcomposPanier.appendChild(objectif);
 
     //prix
     let price = document.createElement("p");
+    price.id = "price-" + cam.id;
     price.innerHTML = "Prix : " + cam.price / 100 + "€";
 
     colcomposPanier.appendChild(price);
@@ -99,7 +97,7 @@ for (let i = 0; i < camPanier.length; i++) {
     rowPrice.appendChild(colPrice);
 
     //Calcul du prix total
-    calculPrice = calculPrice + (cam.price * cam.quantity);
+    calculPrice = calculPrice + (cam.price * cam.quantity / 100);
 
     let containerContinue = document.createElement("div");
     containerContinue.classList.add("container");
@@ -118,10 +116,16 @@ for (let i = 0; i < camPanier.length; i++) {
 
 //Supression de la caméra dans le panier
 for (let i = 0; i < camPanier.length; i++) {
-    document.getElementById("camera-" + camPanier[i]).addEventListener("click", function (event) {
+    document.getElementById("remove-" + camPanier[i]).addEventListener("click", function (event) {
         event.preventDefault();
-        document.getElementById(event.currentTarget.id).remove();
+        document.getElementById("camera-" + camPanier[i]).remove();
+        let item = JSON.parse(localStorage.getItem(camPanier[i]));
+        calculPrice = calculPrice - (item.price / 100);
+        console.log(calculPrice, calculPrice - (item.price / 100))
+        let idPrice = document.getElementById("price-panier");
+        idPrice.innerHTML = "Prix total de votre panier : " + calculPrice + "€";
         localStorage.removeItem(camPanier[i]);
+
     })
 }
 
@@ -130,7 +134,8 @@ if (camPanier.length > 0) {
     //Affichage du prix total
     sectionPanier = document.getElementById("section-panier");
     let pricePanier = document.createElement("p");
-    pricePanier.innerHTML = "Prix total de votre panier : " + calculPrice / 100 + "€";
+    pricePanier.id = "price-panier";
+    pricePanier.innerHTML = "Prix total de votre panier : " + calculPrice + "€";
     pricePanier.classList.add("cent");
     sectionPanier.appendChild(pricePanier);
 
@@ -150,7 +155,7 @@ if (camPanier.length > 0) {
 //Initialisation des éléments nécessaires du DOM à la vérification des données
 let firstName = document.getElementById("firstname");
 let lastName = document.getElementById("lastname");
-let adresse = document.getElementById("adresse");
+let address = document.getElementById("adresse");
 let city = document.getElementById("city");
 let email = document.getElementById("email");
 
@@ -171,11 +176,11 @@ lastName.addEventListener("change", function () {
     }
 })
 
-adresse.addEventListener("change", function () {
-    if (adresse.validity.patternMismatch) {
-        adresse.setCustomValidity("Veuillez rentrer une adresse correcte");
+address.addEventListener("change", function () {
+    if (address.validity.patternMismatch) {
+        address.setCustomValidity("Veuillez rentrer une adresse correcte");
     } else {
-        adresse.setCustomValidity("");
+        address.setCustomValidity("");
     }
 })
 
@@ -197,38 +202,44 @@ email.addEventListener("change", function () {
 
 //Ecoute du bouton d'envoi des données pour finaliser la commande
 let validite = document.getElementById("validation-commande");
-validite.addEventListener("click", function () {
+validite.addEventListener("submit", function (event) {
 
-    //Création de l'object contact avec la récupération des données entrées par l'utilisateur
+    event.preventDefault();
+
+    //Création de l'objet contact avec la récupération des données entrées par l'utilisateur
+    let productsId = [];
     let resultat = {
         contact: {
             firstName: firstName.value,
             lastName: lastName.value,
-            adress: adresse.value,
+            address: address.value,
             city: city.value,
             email: email.value,
         },
-        product: productsId
+        products: productsId
     }
     console.log(resultat);
 
-    //Envoi des données au serveur avec fetch et la méthode post
-    fetch("http://localhost:3000/api/cameras/order",{
+    //Envoi des données au serveur avec fetch et la méthode POST
+    fetch("http://localhost:3000/api/cameras/order", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(resultat)
     })
+        //réponse du serveur
         .then(response => response.json())
         .then(data => {
             localStorage.clear();
             let confirmCommande = {
-                idCommande: data.order_id,
-                PrixTotal: calculPrice
+                idCommande: data.orderId,
+                prixTotal: calculPrice
             }
             console.log(confirmCommande);
-        });
+            let commande = JSON.stringify(confirmCommande);
+            localStorage.setItem("commande", commande);
+        })
 })
 
 

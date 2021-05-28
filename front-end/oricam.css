@@ -110,21 +110,38 @@ footer{
     width: 100%;
 }
 
-.btn-back{
-    width: 20%;
-    margin-left: 20px;
+.btn-success{
+    width: auto;
+}
+
+.btn-look{
+    width: auto;
+    margin-left: 0;
 }
 
 
 /*------page de confirmation de commande------*/
 
-.background-check{
-    background: url(../back-end/images/pp.jpg) no-repeat center;
-    height: 700px;
+#background-check{
+    background: url(../back-end/images/thumb-1920-887690.jpg) no-repeat center;
+    height: 670px;
     width: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+#background-check p{
+    font-size: 2rem;
+}
+
+.title-confirm{
+    text-align: center;
+    color: white;
+}
+.title-red{
+    text-align: center;
+    color: red;
 }
 
 /*------panier------*/
@@ -141,6 +158,7 @@ footer{
 .firstname, .lastname, .adresse, .city, .email{
     width: 60px;
     margin-right: -4px;
+    font-weight: 500;
 }
 
 #firstname{
@@ -155,4 +173,14 @@ footer{
     display: flex;
     justify-content: center;
     padding-top: 20px;
+    text-align: center;
+}
+
+.title-final{
+    text-align: center;
+}
+
+#container-formulaire{
+    background-color: #f2e8f0;
+    border-radius: 20px;
 }
