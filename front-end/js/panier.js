@@ -1,6 +1,5 @@
 //Page panier
 
-
 //Initialisation de la variable du prix total à 0
 let calculPrice = 0;
 
@@ -116,8 +115,7 @@ for (let i = 0; i < camPanier.length; i++) {
 
 //Supression de la caméra dans le panier
 for (let i = 0; i < camPanier.length; i++) {
-    document.getElementById("remove-" + camPanier[i]).addEventListener("click", function (event) {
-        event.preventDefault();
+    document.getElementById("remove-" + camPanier[i]).addEventListener("click", function () {
         document.getElementById("camera-" + camPanier[i]).remove();
         let item = JSON.parse(localStorage.getItem(camPanier[i]));
         calculPrice = calculPrice - (item.price / 100);
@@ -202,9 +200,7 @@ email.addEventListener("change", function () {
 
 //Ecoute du bouton d'envoi des données pour finaliser la commande
 let validite = document.getElementById("validation-commande");
-validite.addEventListener("submit", function (event) {
-
-    event.preventDefault();
+validite.addEventListener("submit", function () {
 
     //Création de l'objet contact avec la récupération des données entrées par l'utilisateur
     let productsId = [];
@@ -239,7 +235,7 @@ validite.addEventListener("submit", function (event) {
             console.log(confirmCommande);
             let commande = JSON.stringify(confirmCommande);
             localStorage.setItem("commande", commande);
-        })
+            window.location = "confirmation.html";
+        });
 })
-
 

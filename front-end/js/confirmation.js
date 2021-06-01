@@ -24,3 +24,4 @@ for (i = 0; 1 < confirm.length; i++) {
     confirmId.innerHTML = "Voici votre numéro de commande : " + finalCommande.idCommande;
     confirmationContainer.appendChild(confirmId);
 }
+localStorage.removeItem("commande");
