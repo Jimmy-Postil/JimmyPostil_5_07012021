@@ -1,18 +1,31 @@
 //Page d'accueil
 
+function element(typeElement, parentElement = null, classesElement = null, idElement = null) {
+    let element = document.createElement(typeElement);
+    parentElement.appendChild(element);
+
+    if (classesElement)
+        element.classList.add(...classesElement);
+
+    if (idElement)
+        element.id = idElement;
+
+    return element;
+}
+
 function colConstructor(cameras) {
     const nodes = []
     //Boucle pour récupérer chaque caméras
     for (let i = 0; i < cameras.length; i++) {
 
+        let containerCards = document.getElementById("container");
+
         //Création de la div col
-        let colDiv = document.createElement("div");
-        colDiv.classList.add("col-12", "col-md-6", "col-lg-6", "col-xl-6", "mt-4", "mx-auto");
+
+        let colDiv = element("div", containerCards, ["col-12", "col-md-6", "col-lg-6", "col-xl-6", "mt-4", "mx-auto"])
 
         //Création des cards
-        let cardDiv = document.createElement("div");
-        colDiv.appendChild(cardDiv);
-        cardDiv.classList.add("card", "w-100", "shadow-lg");
+        let cardDiv = element("div", colDiv, ["card", "w-100", "shadow-lg"]);
 
         //Création des images et de la div card-body
         let cardImg = document.createElement("img");
@@ -66,16 +79,16 @@ const getCameras = function () {
                 if (counter <= 2) {
                     rowDiv.appendChild(cameras);
                     counter++;
-                } 
-                if (counter >2) {
+                }
+                if (counter > 2) {
                     counter = 1;
                     camerasContainer.appendChild(rowDiv);
                     rowDiv = document.createElement("div");
                     rowDiv.classList.add("row");
                 }
             }
-            if (counter >=2){
-            camerasContainer.appendChild(rowDiv);
+            if (counter >= 2) {
+                camerasContainer.appendChild(rowDiv);
             }
         })
 }

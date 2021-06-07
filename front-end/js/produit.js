@@ -37,9 +37,6 @@ const getProduct = async function () {
         event.preventDefault();
         let select = document.getElementById("select-objectif");
         console.log(select.value);
-        if (select === 0) {
-            alert('Vous devez choisir un objectif !');
-        } else {
             let quantity = document.getElementById("quantite");
             let cameraPanier = {
                 id: camera._id,
@@ -53,7 +50,6 @@ const getProduct = async function () {
             let camPanier = JSON.stringify(cameraPanier);
             localStorage.setItem(camera._id, camPanier);
             alert("Votre choix à bien été ajouté à votre panier");
-        }
     })
 }
 getProduct();

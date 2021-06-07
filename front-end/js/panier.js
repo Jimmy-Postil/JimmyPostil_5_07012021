@@ -1,4 +1,17 @@
 //Page panier
+function addElement(elementType, parentElement, elementClasses = null, elementId = null) {
+    let element = document.createElement(elementType);
+    parentElement.appendChild(element);
+
+    if (elementClasses)
+        element.classList.add(...elementClasses);
+
+    if (elementId)
+        element.id = elementId;
+
+    return element;
+}
+
 
 //Initialisation de la variable du prix total à 0
 let calculPrice = 0;
@@ -23,94 +36,59 @@ for (let i = 0; i < camPanier.length; i++) {
 
     //Ajout des différents choix dans la section panier
     let sectionPanier = document.getElementById("section-panier");
-    let containerPanier = document.createElement("div");
-    containerPanier.classList.add("container");
-    containerPanier.id = "camera-" + cam.id;
-    sectionPanier.appendChild(containerPanier);
 
-    let rowPanier = document.createElement("div");
-    rowPanier.classList.add("row", "mt-5", "pt-3", "bo");
-    containerPanier.appendChild(rowPanier);
+    let containerPanier = addElement("div", sectionPanier, ["container"], "camera-" + cam.id);
 
-    let colimgPanier = document.createElement("div");
-    colimgPanier.classList.add("col-12", "col-md-4", "col-lg-4", "col-xl-4");
-    rowPanier.appendChild(colimgPanier);
+    let rowPanier = addElement("div", containerPanier, ["row", "mt-5", "pt-3", "bo"]);
+
+    let colimgPanier = addElement("div", rowPanier, ["col-12", "col-md-4", "col-lg-4", "col-xl-4"]);
 
     //image de la caméra
-    let imgPanier = document.createElement("img");
+    let imgPanier = addElement("img", colimgPanier);
     imgPanier.src = cam.imageUrl;
     imgPanier.setAttribute("height", "150px");
-    imgPanier.setAttribute("width", "230px");
-    colimgPanier.appendChild(imgPanier);
+    imgPanier.setAttribute("width", "100%");
+    imgPanier.style.objectFit = "contain";
 
-    let colcomposPanier = document.createElement("div");
-    colcomposPanier.classList.add("col-6", "col-md-4", "col-lg-4", "col-xl-4");
-    rowPanier.appendChild(colcomposPanier);
+    let colcomposPanier = addElement("div", rowPanier, ["col-6", "col-md-4", "col-lg-4", "col-xl-4", "text-center"])
 
     //Nom
-    let namePanier = document.createElement("h2");
+    let namePanier = addElement("h2", colcomposPanier);
     namePanier.innerHTML = cam.name;
     namePanier.style.color = "blue";
-    colcomposPanier.appendChild(namePanier);
 
     //quantité
-    let quantity = document.createElement("p");
+    let quantity = addElement("p", colcomposPanier);
     quantity.innerHTML = "Quantité : " + cam.quantity;
-    colcomposPanier.appendChild(quantity);
 
     //objectif
-    let objectif = document.createElement("p");
-    objectif.innerHTML = "Objectif : " + cam.lenses;
-    colcomposPanier.appendChild(objectif);
+    let objectif = addElement("p", colcomposPanier);
+    objectif.innerHTML = "objectif : " + cam.lenses;
 
     //prix
-    let price = document.createElement("p");
-    price.id = "price-" + cam.id;
+    let price = addElement("p", colcomposPanier, "price-" + cam.id);
     price.innerHTML = "Prix : " + cam.price / 100 + "€";
 
-    colcomposPanier.appendChild(price);
-
-    let colbuttonPanier = document.createElement("div");
-    colbuttonPanier.classList.add("col-6", "col-md-4", "col-lg-4", "col-xl-4");
-    rowPanier.appendChild(colbuttonPanier);
+    let colbuttonPanier = addElement("div", rowPanier, ["col-6", "col-md-4", "col-lg-4", "col-xl-4", "text-center"])
 
     //Bouton supprimer du panier
-    let buttonPanier = document.createElement("button");
-    buttonPanier.classList.add("btn", "btn-danger");
-    buttonPanier.setAttribute("id", "remove-" + cam.id)
+    let buttonPanier = addElement("button", colbuttonPanier, ["btn", "btn-danger", "mt-5"], "remove-" + cam.id);
     buttonPanier.textContent = "Supprimer du panier";
-    colbuttonPanier.appendChild(buttonPanier);
 
+    let containerPrice = addElement("div", sectionPanier, ["container"], "container")
 
-    let containerPrice = document.createElement("div");
-    containerPrice.classList.add("container");
-    containerPrice.setAttribute("id", "container");
-    sectionPanier.appendChild(containerPrice);
+    let rowPrice = addElement("div", containerPrice, ["row", "mt-3"]);
 
-    let rowPrice = document.createElement("div");
-    rowPrice.classList.add("row", "mt-3");
-    containerPrice.appendChild(rowPrice);
-
-    colPrice = document.createElement("div");
-    colPrice.classList.add("col", "text-center");
-    rowPrice.appendChild(colPrice);
+    let colPrice = addElement("div", rowPrice, ["col", "text-center"]);
 
     //Calcul du prix total
     calculPrice = calculPrice + (cam.price * cam.quantity / 100);
 
-    let containerContinue = document.createElement("div");
-    containerContinue.classList.add("container");
-    sectionPanier.appendChild(containerContinue);
+    let containerContinue = addElement("div", sectionPanier, ["container"]);
 
-    let rowContinue = document.createElement("div");
-    rowContinue.classList.add("row");
-    containerContinue.appendChild(rowContinue);
+    let rowContinue = addElement("div", containerContinue, ["row"]);
 
-    let colContinue = document.createElement('div');
-    colContinue.classList.add("col");
-    colContinue.setAttribute("id", "col-continue");
-    rowContinue.appendChild(colContinue);
-
+    let colContinue = addElement("div", rowContinue, ["col"], "col-continue")
 }
 
 //Supression de la caméra dans le panier
@@ -119,7 +97,7 @@ for (let i = 0; i < camPanier.length; i++) {
         document.getElementById("camera-" + camPanier[i]).remove();
         let item = JSON.parse(localStorage.getItem(camPanier[i]));
         calculPrice = calculPrice - (item.price / 100);
-        console.log(calculPrice, calculPrice - (item.price / 100))
+
         let idPrice = document.getElementById("price-panier");
         idPrice.innerHTML = "Prix total de votre panier : " + calculPrice + "€";
         localStorage.removeItem(camPanier[i]);
@@ -157,51 +135,38 @@ let address = document.getElementById("adresse");
 let city = document.getElementById("city");
 let email = document.getElementById("email");
 
+function getErrorMessage(element) {
+    switch (element.id) {
+        case "address": return "Veuillez rentrer une adresse correcte";
+        case "city": return "Veuillez rentrer une ville existante";
+        case "email": return "Veuillez renter un e-mail correcte";
+        default: return "Ce champ contient des erreurs";
+    }
+}
+
+function validateField(event) {
+    if (event.currentTarget.validity.patternMismatch) {
+        event.currentTarget.setCustomValidity(getErrorMessage(event.currentTarget));
+    } else {
+        event.currentTarget.setCustomValidity("");
+    }
+}
 //Création des conditions pour la validité syntaxique des champs de formulaires
-firstName.addEventListener("change", function () {
-    if (firstName.validity.patternMismatch) {
-        firstName.setCustomValidity("Ce champ contient des erreurs");
-    } else {
-        firstName.setCustomValidity("");
-    }
-})
+firstName.addEventListener("change", validateField)
 
-lastName.addEventListener("change", function () {
-    if (lastName.validity.patternMismatch) {
-        lastName.setCustomValidity("Ce champ contient des erreurs");
-    } else {
-        lastName.setCustomValidity("");
-    }
-})
+lastName.addEventListener("change", validateField)
 
-address.addEventListener("change", function () {
-    if (address.validity.patternMismatch) {
-        address.setCustomValidity("Veuillez rentrer une adresse correcte");
-    } else {
-        address.setCustomValidity("");
-    }
-})
+address.addEventListener("change", validateField);
 
-city.addEventListener("change", function () {
-    if (city.validity.patternMismatch) {
-        city.setCustomValidity("Veuillez rentrer une ville existante");
-    } else {
-        city.setCustomValidity("");
-    }
-})
+city.addEventListener("change", validateField);
 
-email.addEventListener("change", function () {
-    if (email.validity.patternMismatch) {
-        email.setCustomValidity("Veuillez renter un e-mail correcte");
-    } else {
-        email.setCustomValidity("");
-    }
-})
+email.addEventListener("change", validateField);
 
 //Ecoute du bouton d'envoi des données pour finaliser la commande
 let validite = document.getElementById("validation-commande");
-validite.addEventListener("submit", function () {
+validite.addEventListener("submit", function (event) {
 
+    event.preventDefault();
     //Création de l'objet contact avec la récupération des données entrées par l'utilisateur
     let productsId = [];
     let resultat = {
