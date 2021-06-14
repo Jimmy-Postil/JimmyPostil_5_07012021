@@ -1,4 +1,6 @@
 //Page panier
+
+//fonction pour la mise en page des éléments
 function addElement(elementType, parentElement, elementClasses = null, elementId = null) {
     let element = document.createElement(elementType);
     parentElement.appendChild(element);
@@ -20,15 +22,20 @@ let calculPrice = 0;
 let camPanier = Object.keys(localStorage);
 console.log(camPanier);
 
-if (camPanier.length === 0) {
-    const empty = document.createElement("p");
-    empty.classList.add("middle");
-    empty.innerHTML = "Aucun article n'a été ajouté, votre panier est vide.</br>Veuillez séléctionner un article afin de l'ajouter à votre panier.";
-    empty.style.color = "red";
-    empty.style.fontSize = "2rem";
-    let sectionPanier = document.getElementById("section-panier");
-    sectionPanier.appendChild(empty);
+function emptyPanier(camPanier) {
+    if (camPanier.length === 0) {
+        const empty = document.createElement("p");
+        empty.classList.add("middle");
+        empty.innerHTML = "Aucun article n'a été ajouté, votre panier est vide.</br>Veuillez séléctionner un article afin de l'ajouter à votre panier.";
+        empty.style.color = "red";
+        empty.style.fontSize = "2rem";
+        let sectionPanier = document.getElementById("section-panier");
+        sectionPanier.appendChild(empty);
+    }
 }
+
+emptyPanier(camPanier);
+
 for (let i = 0; i < camPanier.length; i++) {
     let cam = JSON.parse(localStorage.getItem(camPanier[i]));
     console.log(cam);
@@ -92,41 +99,46 @@ for (let i = 0; i < camPanier.length; i++) {
 }
 
 //Supression de la caméra dans le panier
-for (let i = 0; i < camPanier.length; i++) {
-    document.getElementById("remove-" + camPanier[i]).addEventListener("click", function () {
-        document.getElementById("camera-" + camPanier[i]).remove();
-        let item = JSON.parse(localStorage.getItem(camPanier[i]));
-        calculPrice = calculPrice - (item.price / 100);
+function removeCamera(camPanier) {
+    for (let i = 0; i < camPanier.length; i++) {
+        document.getElementById("remove-" + camPanier[i]).addEventListener("click", function () {
+            document.getElementById("camera-" + camPanier[i]).remove();
+            let item = JSON.parse(localStorage.getItem(camPanier[i]));
+            calculPrice = calculPrice - (item.price / 100);
+            let idPrice = document.getElementById("price-panier");
+            idPrice.innerHTML = "Prix total de votre panier : " + calculPrice + "€";
+            localStorage.removeItem(camPanier[i]);
 
-        let idPrice = document.getElementById("price-panier");
-        idPrice.innerHTML = "Prix total de votre panier : " + calculPrice + "€";
-        localStorage.removeItem(camPanier[i]);
-
-    })
+        })
+    }
 }
 
-if (camPanier.length > 0) {
+removeCamera(camPanier);
 
-    //Affichage du prix total
-    sectionPanier = document.getElementById("section-panier");
-    let pricePanier = document.createElement("p");
-    pricePanier.id = "price-panier";
-    pricePanier.innerHTML = "Prix total de votre panier : " + calculPrice + "€";
-    pricePanier.classList.add("cent");
-    sectionPanier.appendChild(pricePanier);
+function panierPriceContinue(camPanier) {
+    if (camPanier.length > 0) {
+
+        //Affichage du prix total
+        sectionPanier = document.getElementById("section-panier");
+        let pricePanier = document.createElement("p");
+        pricePanier.id = "price-panier";
+        pricePanier.innerHTML = "Prix total de votre panier : " + calculPrice + "€";
+        pricePanier.classList.add("cent");
+        sectionPanier.appendChild(pricePanier);
 
 
-    //Bouton continuer mes achats
-    sectionPanier = document.getElementById("section-panier");
-    let linkContinue = document.createElement("a");
-    linkContinue.href = "index.html";
-    sectionPanier.appendChild(linkContinue);
-    let buttonContinue = document.createElement("button");
-    buttonContinue.classList.add("btn", "btn-primary");
-    buttonContinue.textContent = "Continuer mes achats";
-    linkContinue.appendChild(buttonContinue);
-
+        //Bouton continuer mes achats
+        sectionPanier = document.getElementById("section-panier");
+        let linkContinue = document.createElement("a");
+        linkContinue.href = "index.html";
+        sectionPanier.appendChild(linkContinue);
+        let buttonContinue = document.createElement("button");
+        buttonContinue.classList.add("btn", "btn-primary");
+        buttonContinue.textContent = "Continuer mes achats";
+        linkContinue.appendChild(buttonContinue);
+    }
 }
+panierPriceContinue(camPanier);
 
 //Initialisation des éléments nécessaires du DOM à la vérification des données
 let firstName = document.getElementById("firstname");

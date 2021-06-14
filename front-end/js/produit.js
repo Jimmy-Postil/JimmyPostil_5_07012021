@@ -20,23 +20,28 @@ const getProduct = async function () {
     // ajout des différents objectifs 
     const lenses = camera.lenses;
 
-    for (i = 0; i < lenses.length; i++) {
-        const selectOption = document.createElement('option');
-        select = document.getElementById("select-objectif");
-        select.appendChild(selectOption);
-        selectOption.innerHTML = lenses[i];
-        selectOption.setAttribute("value", lenses[i]);
-        if (i === 0) {
-            selectOption.setAttribute("selected", true);
+    function objectif(lenses) {
+        for (i = 0; i < lenses.length; i++) {
+            const selectOption = document.createElement('option');
+            select = document.getElementById("select-objectif");
+            select.appendChild(selectOption);
+            selectOption.innerHTML = lenses[i];
+            selectOption.setAttribute("value", lenses[i]);
+            if (i === 0) {
+                selectOption.setAttribute("selected", true);
+            }
         }
     }
 
-    //Initialisation du bouton d'ajout au panier et écoute de l'événement
-    const btnPanier = document.getElementById("btn-panier");
-    btnPanier.addEventListener("click", function (event) {
-        event.preventDefault();
-        let select = document.getElementById("select-objectif");
-        console.log(select.value);
+    objectif(lenses);
+
+    function addlocalStorage(camera) {
+        //Initialisation du bouton d'ajout au panier et écoute de l'événement
+        const btnPanier = document.getElementById("btn-panier");
+        btnPanier.addEventListener("click", function (event) {
+            event.preventDefault();
+            let select = document.getElementById("select-objectif");
+            console.log(select.value);
             let quantity = document.getElementById("quantite");
             let cameraPanier = {
                 id: camera._id,
@@ -50,8 +55,11 @@ const getProduct = async function () {
             let camPanier = JSON.stringify(cameraPanier);
             localStorage.setItem(camera._id, camPanier);
             alert("Votre choix à bien été ajouté à votre panier");
-    })
+        })
+    }
+    addlocalStorage(camera);
 }
+
 getProduct();
 
 

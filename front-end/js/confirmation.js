@@ -1,27 +1,40 @@
 //Page confirmation de commande
-let confirmationContainer = document.getElementById("background-check");
 
-//Récupération du localStorage
-let confirm = Object.keys(localStorage);
-console.log(confirm);
+//fonction pour la mise en page des éléments
+function addElement(elementType, parentElement = null, elementClasses = null, elementId = null) {
+    let element = document.createElement(elementType);
+    parentElement.appendChild(element);
 
-for (i = 0; i < confirm.length; i++) {
-    let finalCommande = JSON.parse(localStorage.getItem(confirm[i]))
+    if (elementClasses)
+        element.classList.add(...elementClasses);
 
-    //Création des éléments de la page
-    let confirmationPrice = document.createElement("h1");
-    confirmationPrice.classList.add("title-confirm");
-    confirmationPrice.innerHTML = "Merci pour votre commande d'un montant de " + finalCommande.prixTotal + "€";
-    confirmationContainer.appendChild(confirmationPrice);
+    if (elementId)
+        element.id = elementId;
 
-    let confirmationDelai = document.createElement("p");
-    confirmationDelai.classList.add("title-confirm");
-    confirmationDelai.innerHTML = "Votre colis sera expédié dans les plus brefs délais."
-    confirmationContainer.appendChild(confirmationDelai);
-
-    confirmId = document.createElement("p");
-    confirmId.classList.add("title-red");
-    confirmId.innerHTML = "Voici votre numéro de commande : " + finalCommande.idCommande;
-    confirmationContainer.appendChild(confirmId);
+    return element;
 }
-localStorage.clear();
+
+function initPage() {
+    let confirmationContainer = document.getElementById("background-check");
+
+    //Récupération du localStorage
+    let confirm = Object.keys(localStorage);
+    console.log(confirm);
+
+    for (i = 0; i < confirm.length; i++) {
+        let finalCommande = JSON.parse(localStorage.getItem(confirm[i]))
+
+        //Création des éléments de la page
+        let confirmationPrice = addElement("h1", confirmationContainer, ["title-confirm"]);
+        confirmationPrice.innerHTML = "Merci pour votre commande d'un montant de " + finalCommande.prixTotal + "€";
+
+        let confirmationDelai = addElement("p", confirmationContainer, ["title-confirm"]);
+        confirmationDelai.innerHTML = "Votre colis sera expédié dans les plus brefs délais.";
+
+        let confirmId = addElement("p", confirmationContainer, ["title-red"]);
+        confirmId.innerHTML = "Voici votre numéro de commande : " + finalCommande.idCommande;
+    }
+    localStorage.clear();
+}
+
+initPage();
