@@ -27,9 +27,6 @@ const getProduct = async function () {
             select.appendChild(selectOption);
             selectOption.innerHTML = lenses[i];
             selectOption.setAttribute("value", lenses[i]);
-            if (i === 0) {
-                selectOption.setAttribute("selected", true);
-            }
         }
     }
 
